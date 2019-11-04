@@ -5,6 +5,8 @@
 #   uniqueWordCounts::Dict{String, Number}
 # end
 
+# using Plots: gr, plot, savefig
+
 function main(text::String)
   # Trim of header
   (header, content) = split(text, r"\*+[\w0-9\s]+\*+")
@@ -30,8 +32,15 @@ function main(text::String)
     wordHistogram["totalWordCount"] += 1
     wordHistogram["uniqueWordCounts"][word] = get(wordHistogram["uniqueWordCounts"], word, 0) + 1
   end 
-  println(wordHistogram["totalWordCount"])
-  println("Gender Pronoun Ratio (GPR): $(get(wordHistogram["uniqueWordCounts"], "he", 0)/get(wordHistogram["uniqueWordCounts"], "she", 1))")
+  @show wordHistogram["uniqueWordCounts"]
+  # println(wordHistogram["totalWordCount"])
+  # println("Gender Pronoun Ratio (GPR): $(get(wordHistogram["uniqueWordCounts"], "he", 0)/get(wordHistogram["uniqueWordCounts"], "she", 1))")
+  # x = sort(collect(values(wordHistogram["uniqueWordCounts"])))
+  # reverse!(x)
+  # y = log.(x)
+  # gr()
+  # p = plot(x,y, xscale = :log);
+  # savefig(p,"word_rank_log_log.png")
 end
 
 # Import txt file and feed to main
